@@ -22,4 +22,7 @@ type Query {
 
   """Retrieve all todo items"""
   todos: [Todo!]!
+
+  """Retrieve a todo item by its ID"""
+  todo(id: Int!): Todo!
 }
