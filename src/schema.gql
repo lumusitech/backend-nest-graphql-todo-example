@@ -9,6 +9,8 @@ type Query {
   """Get a random float number between 0 and 1"""
   randomNumber: Float!
 
-  """Get a random integer number between 0 and 9"""
-  randomFromZeroTo: Int!
+  """
+  Get a random integer number between 0 and the provided "to" value (exclusive)
+  """
+  randomFromZeroTo(to: Int): Int!
 }
