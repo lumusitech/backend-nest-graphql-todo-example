@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Todo } from './todo.entity';
+import { CreateTodoInput } from './dto/input/create-dto.input';
+import { Todo } from './entity/todo.entity';
 
 @Injectable()
 export class TodoService {
@@ -20,10 +21,17 @@ export class TodoService {
     return todo;
   }
 
-  create(description: string): Todo {
+  create(createTodoInput: CreateTodoInput): Todo {
+    if (
+      !createTodoInput.description ||
+      createTodoInput.description.trim() === ''
+    ) {
+      throw new Error('Description cannot be empty');
+    }
+
     const newTodo = {
-      id: this.todos.length + 1,
-      description,
+      id: Math.max(...this.todos.map((todo) => todo.id), 0) + 1,
+      ...createTodoInput,
       done: false,
     };
     this.todos.push(newTodo);
