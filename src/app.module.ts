@@ -3,8 +3,10 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { HelloWorldResolver } from './hello-world/hello-world.resolver';
+
+import { HelloWorldResolver } from './helloworld/hello-world.resolver';
 import { HelloworldModule } from './helloworld/helloworld.module';
+import { TodoModule } from './todo/todo.module';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { HelloworldModule } from './helloworld/helloworld.module';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     HelloworldModule,
+    TodoModule,
   ],
   controllers: [],
   providers: [HelloWorldResolver],
