@@ -13,6 +13,18 @@ export class TodoService {
     { id: 4, description: 'Deploy to production', done: false },
   ];
 
+  get totalTodos(): number {
+    return this.todos.length;
+  }
+
+  get pendingTodos(): number {
+    return this.todos.filter((todo) => !todo.done).length;
+  }
+
+  get completedTodos(): number {
+    return this.todos.filter((todo) => todo.done).length;
+  }
+
   findAll(statusArgs: StatusArgs): Todo[] {
     const { status } = statusArgs;
     if (status !== undefined) {

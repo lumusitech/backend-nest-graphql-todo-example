@@ -8,6 +8,21 @@ type Todo {
   done: Boolean
 }
 
+"""Aggregated todo statistics"""
+type Aggregations {
+  """Total number of todos"""
+  total: Float!
+
+  """Number of completed todos"""
+  completed: Float!
+
+  """Number of pending todos"""
+  pending: Float!
+
+  """An obsolete field for demonstration purposes"""
+  obsoleteField: String! @deprecated(reason: "This field is no longer in use and will be removed in future versions.")
+}
+
 type Query {
   """A simple Hello World query"""
   hello: String!
@@ -28,6 +43,18 @@ type Query {
 
   """Retrieve a todo item by its ID"""
   todo(id: Int!): Todo!
+
+  """Get the total number of completed todos"""
+  completedTodos: Int!
+
+  """Get the total number of pending todos"""
+  pendingTodos: Int!
+
+  """Get the total number of todos"""
+  totalTodos: Int!
+
+  """Get aggregated statistics of todos"""
+  todoAggregations: Aggregations!
 }
 
 type Mutation {
